@@ -6,11 +6,7 @@ Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
 string url = "https://asu.bspu.ru/Rasp/Rasp.aspx?group=20128&sem=2";
 
-SocketsHttpHandler handler = new SocketsHttpHandler();
-
-handler.UseCookies = false;
-
-HttpClient client = new HttpClient(handler);
+HttpClient client = new HttpClient();
 
 HttpResponseMessage first_resp_msg = await client.GetAsync(url);
 
@@ -29,9 +25,7 @@ Dictionary<string, string> form_data = new Dictionary<string, string>()
 
 FormUrlEncodedContent content = new FormUrlEncodedContent(form_data);
 
-HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "https://asu.bspu.ru/Rasp/Rasp.aspx?group=20128&sem=2");
-
-content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/x-www-form-urlencoded");
+HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url);
 
 request.Content = content;
 
